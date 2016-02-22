@@ -2,6 +2,7 @@
 《Linux集群和自动化运维》脚本源码
 ========================================
 附注：因为书中的无论是配置文件还是SHELL脚本、Python脚本，代码量并不是太多，所以这里以章节的形式出现，比如1.5.3-1.sh，表示1.5.3章节的第一个SHELL脚本，其它方面大家可以依此类推。
+本书GitHub地址：http://github.com/yuhongchun/automation
 
 章节内容
 ----------------------------------------
@@ -14,4 +15,4 @@
 作者邮件：yuhongchun027@gmail.com<br> 
 作者微博：http://weibo.com/yuhongchun<br> 
 作者博客：http://yuhongchun.blog.51cto.com<br> 
-本书GitHub地址：http://github.com/yuhongchun/automation
+
