@@ -1,0 +1,100 @@
+001    #!/bin/sh
+002     
+003    # source function library
+004    . /etc/rc.d/init.d/functions
+005     
+006    # Source networking configuration.
+007    . /etc/sysconfig/network
+008     
+009    # Check that networking is up.
+010    [ ${NETWORKING} = "no" ] && exit 0
+011     
+012    RETVAL=0
+013    prog="nginx"
+014     
+015    nginxDir=/usr/local/nginx
+016    nginxd=$nginxDir/sbin/nginx
+017    nginxConf=$nginxDir/conf/nginx.conf
+018    nginxPid=$nginxDir/nginx.pid
+019     
+020    nginx_check（）
+021    {
+022        if [[ -e $nginxPid ]]; then
+023            ps aux |grep -v grep |grep -q nginx
+024            if （（ $? == 0 ））; then
+025                echo "$prog already running..."
+026                exit 1
+027            else
+028                rm -rf $nginxPid &> /dev/null
+029            fi
+030        fi
+031    }
+032     
+033    start（）
+034    {
+035        nginx_check
+036        if （（ $? != 0 ））; then
+037            true
+038        else
+039            echo -n $"Starting $prog:"
+040            daemon $nginxd -c $nginxConf
+041            RETVAL=$?
+042            echo
+043            [ $RETVAL = 0 ] && touch /var/lock/subsys/nginx
+044            return $RETVAL
+045        fi
+046    }
+047     
+048    stop（）
+049    {
+050        echo -n $"Stopping $prog:"
+051        killproc $nginxd
+052        RETVAL=$?
+053        echo
+054        [ $RETVAL = 0 ] && rm -f /var/lock/subsys/nginx $nginxPid
+055    }
+056     
+057    reload（）
+058    {
+059        echo -n $"Reloading $prog:"
+060        killproc $nginxd -HUP
+061        RETVAL=$?
+062        echo
+063    }
+064     
+065    monitor（）
+066    {
+067        status $prog &> /dev/null
+068        if （（ $? == 0 ））; then
+069            RETVAL=0
+070        else
+071            RETVAL=7
+072        fi
+073    }
+074     
+075    case "$1" in
+076            start）
+077                    start
+078                    ;;
+079            stop）
+080                    stop
+081                    ;;
+082            restart）
+083                    stop
+084                    start
+085                    ;;
+086            reload）
+087                    reload
+088                    ;;
+089            status）
+090                    status $prog
+091                    RETVAL=$?
+092                    ;;
+093            monitor）
+094                    monitor
+095                    ;;
+096            *）
+097                    echo $"Usage: $0 {start|stop|restart|reload|status|monitor}"
+098                    RETVAL=1
+099    esac
+100    exit $RETVA
