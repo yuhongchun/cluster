@@ -1,0 +1,17 @@
+# Using alternate directory locations:
+- hosts: webserver
+  user: root
+  tasks:
+  - name: ensure users is present
+    user: name={{ item }} state=present
+    with_items:
+       - ec2-user
+       - admin
+       - readonly
+
+  - name: ssh-copy-id user ec2-user
+    authorized_key: user=ec2-user key='{{ lookup('file', '/home/yhc/ansible/ssh-copy-id/example-master.pub') }}'
+  - name: ssh-copy-id user admin
+    authorized_key: user=admin key='{{ lookup('file', '/home/yhc/ansible/ssh-copy-id/example-operation.pub') }}'
+  - name: ssh-copy-id user readonly
+    authorized_key: user=readonly key='{{ lookup('file', '/home/yhc/ansible/ssh-copy-id/example-readonly.pub') }}'
