@@ -1,0 +1,28 @@
+#选择的主机组
+- hosts: webserver
+#定义的变量
+  vars:
+    user: www
+    group: www
+    maxclients: 2000
+    DocumentRoot: /var/www/html
+#远端的执行权限
+  remote_user: root
+#task是定义任务列表
+  tasks:
+#利用yum模块来操作
+  - name: ensure apache is at the latest version
+#建议每个任务事件都要定义一个name标签，这样做既增强可读性，也便于观察结果输出。
+    yum: pkg=httpd state=latest
+  - name: write the Aapache Cconfig Ffile
+    template: src=/home/yhc/apache/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+    #src为Ansible主控端模块存放位置，dest为被控端httpd配置文件位置
+#触发重启服务器
+    notify:
+    - restart apache
+  - name: ensure apache is running
+    service: name=httpd state=started
+#这里的restart apache 和上面的触发是配对的,这就是handlers（处理程序）的作用。
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted
