@@ -1,0 +1,10 @@
+---
+- name: ensure nginx is thd latest version
+  yum: name=nginx state=latest
+
+- name: Copy nginx configuration 
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+- name: ensure nginx is running
+  service: name=nginx state=started
+

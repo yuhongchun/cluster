@@ -1,0 +1,7 @@
+---
+- name: Copy the EPEL repository definition
+  copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+
+- name: Create the GPG key for EPEL 
+  command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+

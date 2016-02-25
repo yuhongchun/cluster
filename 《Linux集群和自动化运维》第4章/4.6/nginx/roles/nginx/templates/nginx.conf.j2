@@ -1,0 +1,29 @@
+user              nginx;  
+worker_processes {{  ansible_processor_cores }};
+{% if ansible_processor_cores  == 2 %}  
+worker_cpu_affinity 01 10;  
+{% elif ansible_processor_cores == 4 %}  
+worker_cpu_affinity 1000 0100 0010 0001;  
+{% elif ansible_processor_cores >= 8 %}  
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;  
+{% else %}  
+worker_cpu_affinity 1000 0100 0010 0001;  
+{% endif %}  
+worker_rlimit_nofile 65535; 
+events {
+    use epoll; 
+    worker_connections  51200;
+}
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log  /var/log/nginx/access.log  main;
+    sendfile        on;
+    #tcp_nopush     on;
+    keepalive_timeout  65;
+    #gzip  on;
+    include /etc/nginx/conf.d/*.conf;
+}
