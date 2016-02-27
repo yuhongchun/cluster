@@ -1,0 +1,9 @@
+server {
+listen       80;
+server_name  <%= sitedomain %>;
+access_log /var/log/nginx/<%= sitedomain %>.access.log;
+location / {
+root /var/www/<%= rootdir %>;
+index    index.php index.html index.htm;
+}
+}
