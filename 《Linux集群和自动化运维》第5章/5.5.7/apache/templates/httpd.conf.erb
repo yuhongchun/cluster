@@ -1,0 +1,12 @@
+<VirtualHost *:<%= port %>>
+ServerName <%= sitedomain %>
+DocumentRoot /var/www/html/<%= rootdir %>
+ <Directory <%= rootdir %>>
+  Options Indexes FollowSymLinks
+  AllowOverride None
+  Order allow,deny
+  Allow from all
+ </Directory>
+ErrorLog logs/<%= sitedomain %>_error.log
+CustomLog logs/<%= sitedomain %>_access.log common
+</VirtualHost>
