@@ -11,7 +11,7 @@
 ###第3章 轻量级自动化运维工具Fabric<br>
 ###第4章 自动化部署管理工具Ansible<br>
 ###第5章 自动化部署管理工具Puppet<br>
-###第6章 Linux防火墙iptables<br>
+###第6章 Linux防火墙和系统安全篇<br>
 
 
 作者联系方式
