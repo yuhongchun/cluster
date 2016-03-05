@@ -1,0 +1,7 @@
+logfile         /var/log/ha-log   #定义HA的日志名字及存放位置
+logfacility     local0
+keepalive       2  #设定心跳（监测)时间为2秒
+deadtime        5  #死亡时间定义为5秒
+ucast           eth1 10.0.0.2  #采用单播方式，IP地址指定为对方IP
+auto_failback   off  #服务器正常后由主服务器接管资源，另一台服务器放弃该资源
+node            centos1.7788.com  centos2.7788.com  #定义节点
