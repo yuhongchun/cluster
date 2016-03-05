@@ -1,0 +1,1 @@
+centos1.mypharma.com IPaddr::112.112.68.174/29/eth0 drbddisk::r0 Filesystem::/dev/drbd0::/drbd::ext3  mysqld

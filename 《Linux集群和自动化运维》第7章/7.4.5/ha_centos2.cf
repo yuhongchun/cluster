@@ -1,0 +1,9 @@
+logfile /var/log/ha-log
+logfacility local0
+keepalive 2
+deadtime 15
+ucast eth0 112.112.68.170
+ucast eth2 10.0.0.1
+ucast eth3 192.168.1.1
+auto_failback off
+node centos1.mypharma.com centos2.mypharma.com

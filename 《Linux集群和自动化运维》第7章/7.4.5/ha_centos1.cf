@@ -1,0 +1,10 @@
+logfile /var/log/ha-log #定义Heartbeat的日志名字及位置
+logfacility local0
+keepalive 2 #设定心跳(监测)时间为2秒
+deadtime 15 #设定死亡时间为15秒
+ucast eth0 112.112.68.172
+ucast eth2 10.0.0.2
+ucast eth3 192.168.1.2
+#采用单播的方式，IP地址指定为对方IP，这里为了防止脑裂，特的用了二条心跳线外加公网地址IP作为心跳监测线路，事实上，在项目上线测试阶段，除非人为手动破坏，不然是没有发生脑裂的可能。
+auto_failback off #当Primary机器发生故障切换到Secondary机器后不再进行切回操作。
+node centos1.mypharma.com centos2.mypharma.com
