@@ -1,0 +1,1 @@
+centos1.cn7788.com IPaddr::192.168.1.108/24/eth0 drbddisk::r0 Filesystem::/dev/drbd0::/drbd::ext3 killnfsd
