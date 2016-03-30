@@ -1,7 +1,7 @@
 newrecord("bid-east.example.net") do |query, answer|
-        ips = ["54.175.1.2", "54.164.1.2", "52.6.1.2","54.164.1.2", "54.175.1.2","54.175.1.3","54.175.1.4","52.4.1.2"…… ]
+        ips = ["54.175.1.2", "54.164.1.2", "52.6.1.2","54.164.1.2","54.175.1.2","54.175.1.3","54.175.1.4","52.4.1.2"…… ]
 	     #bidder机器大约20台左右，公网IP作了无害处理
-        ips = ips.randomize([1, 1, 1, 1, 1, 1, 1, 1])
+        ips = ips.randomize([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
         answer.shuffle false
         answer.ttl 30
         answer.content ips[0]
@@ -12,6 +12,19 @@ newrecord("bid-east.example.net") do |query, answer|
         answer.content ips[5]
         answer.content ips[6]
         answer.content ips[7]
+        answer.content ips[8]
+        answer.content ips[9]
+        answer.content ips[10]
+        answer.content ips[11]
+        answer.content ips[12]
+        answer.content ips[13]
+        answer.content ips[14]
+        answer.content ips[15]
+        answer.content ips[16]
+        answer.content ips[17]
+        answer.content ips[18]
+        answer.content ips[19]
+
     end
 
 module Pdns
@@ -32,7 +45,7 @@ module Pdns
                                                 answer.content "54.67.1.2"
                                 end
                         else
-                        # 如果用户IP都不在上面的城市，则选择默认的西部机器
+                        # 如果用户IP都不在上面的城市，则选择默认的西部图片服务器
                         answer.ttl 300
                         answer.content "54.67.1.2"
                 end
