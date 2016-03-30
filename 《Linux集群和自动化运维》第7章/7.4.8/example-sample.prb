@@ -28,7 +28,7 @@ newrecord("bid-east.example.net") do |query, answer|
     end
 
 module Pdns
-        newrecord("ads.bilinmedia.net") do |query, answer|
+        newrecord("ads.example.net") do |query, answer|
                 country_, region_ = country(query[:remoteip])
                 answer.qclass query[:qclass]
                 answer.qtype :A
