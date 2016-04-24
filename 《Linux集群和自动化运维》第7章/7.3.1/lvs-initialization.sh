@@ -15,7 +15,7 @@ case "$1" in
   /sbin/ipvsadm -C
   #Set LVS rules
   /sbin/ipvsadm -A -t $VIP:80 -s wrr -p 120
-  #如果没有-p参数的话，我们等会访问VIP地址时会发现会在后端的两台Web上轮询切换
+  #如果没有-p参数的话，我们等会访问VIP地址时会发现，VIP地址会在后端的两台Web机器上轮流切换
   /sbin/ipvsadm -a -t $VIP:80 -r $RIP1:80 -g
   /sbin/ipvsadm -a -t $VIP:80 -r $RIP2:80 -g
   #Run LVS
