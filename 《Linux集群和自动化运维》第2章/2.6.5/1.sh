@@ -4,4 +4,4 @@ for name in tom jerry joe jane yhc brain
 do
       useradd $name
       echo redhat | passwd --stdin $name
-don
+done
