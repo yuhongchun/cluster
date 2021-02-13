@@ -5,6 +5,8 @@
 附注：因为书中的无论是各项Linux服务的配置文件（多数是conf文件）还是SHELL脚本、Python脚本，代码量并不是太多，所以这里以章节的形式出现，比如1.5.3目录下面有1.sh，表示这是1.5.3章节的第一个SHELL脚本，如果是2.sh，则表示是第二个SHELL脚本。其它章节的脚本大家可以依此类推，在哪个章节出现的配置文件或脚本就在哪个章节去找，这样方便。<br>
 本书GitHub地址：http://github.com/yuhongchun/cluster
 
+https://github.com/yuhongchun/cluster/blob/master/screenhot/0b77e355ff8b6c0f.jpg
+
 章节内容
 ----------------------------------------
 第1章 Linux集群基础概念<br>
@@ -25,4 +27,3 @@
 作者博客：http://yuhongchun.blog.51cto.com<br> 
 
 
-![image](https://github.com/yuhongchun/avaliablity/blob/master/screenhot/20171120093051.jpg)
