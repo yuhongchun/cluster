@@ -1,0 +1,43 @@
+# 修改api版本及kind
+# apiVersion: apps/v1
+# kind: Deployment
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+# 删除Replicas
+# replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/part-of: ingress-nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ingress-nginx
+        app.kubernetes.io/part-of: ingress-nginx
+      annotations:
+        prometheus.io/port: "10254"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: nginx-ingress-serviceaccount
+      # 选择对应标签的node
+      nodeSelector:
+        isIngress: "true"
+      # 使用hostNetwork暴露服务
+      hostNetwork: true
+      containers:
+        - name: nginx-ingress-controller
+          image: 192.168.1.222:8084/nginx-ingress-controller:0.28.0
+          args:
+            - /nginx-ingress-controller
+            - --configmap=$(POD_NAMESPACE)/nginx-configuration
+            - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+            - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
+            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
+            - --annotations-prefix=nginx.ingress.kubernetes.io
